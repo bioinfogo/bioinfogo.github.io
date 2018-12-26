@@ -1,0 +1,798 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="JBrowser 一款具有很高易用性的基因组浏览器，与UCSC Genome Browser 相似。但是通过简单对比其配置过程，可以发现JBrowser 更容易配置，自由度更高。所以为了呈现非模式生物的基因组，利用JBrowser是一个很不错的选择。我在一年多之前配置过该工具，效果令人满意。近来需要在另外一台服务器上配置，所以将大体的配置过程总结整理一下。 安装下载获取JBrowser的最新版本，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JBrowser 基因组呈现工具的配置">
+<meta property="og:url" content="http://www.bioinfogo.tk/2017/09/30/JBrowser 基因组呈现工具的配置/index.html">
+<meta property="og:site_name" content="BioinfoGo">
+<meta property="og:description" content="JBrowser 一款具有很高易用性的基因组浏览器，与UCSC Genome Browser 相似。但是通过简单对比其配置过程，可以发现JBrowser 更容易配置，自由度更高。所以为了呈现非模式生物的基因组，利用JBrowser是一个很不错的选择。我在一年多之前配置过该工具，效果令人满意。近来需要在另外一台服务器上配置，所以将大体的配置过程总结整理一下。 安装下载获取JBrowser的最新版本，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-07T13:53:29.740Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JBrowser 基因组呈现工具的配置">
+<meta name="twitter:description" content="JBrowser 一款具有很高易用性的基因组浏览器，与UCSC Genome Browser 相似。但是通过简单对比其配置过程，可以发现JBrowser 更容易配置，自由度更高。所以为了呈现非模式生物的基因组，利用JBrowser是一个很不错的选择。我在一年多之前配置过该工具，效果令人满意。近来需要在另外一台服务器上配置，所以将大体的配置过程总结整理一下。 安装下载获取JBrowser的最新版本，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.bioinfogo.tk/2017/09/30/JBrowser 基因组呈现工具的配置/">
+
+
+
+
+
+  <title>JBrowser 基因组呈现工具的配置 | BioinfoGo</title>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62943161";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BioinfoGo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.bioinfogo.tk/2017/09/30/JBrowser 基因组呈现工具的配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kang Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BioinfoGo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JBrowser 基因组呈现工具的配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-30T21:05:08+08:00">
+                2017-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/基因组学/" itemprop="url" rel="index">
+                    <span itemprop="name">基因组学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">Page visited</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JBrowser 一款具有很高易用性的基因组浏览器，与UCSC Genome Browser 相似。<br>但是通过简单对比其配置过程，可以发现JBrowser 更容易配置，自由度更高。所以为了呈现非模式生物的基因组，利用JBrowser是一个很不错的选择。<br>我在一年多之前配置过该工具，效果令人满意。近来需要在另外一台服务器上配置，所以将大体的配置过程总结整理一下。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下载获取JBrowser的最新版本，官方地址在此 –&gt; <a href="http://jbrowse.org/jbrowse-1-12-3/" target="_blank" rel="noopener">Download</a><br>unzip 解压一下，进入该目录之后：</p>
+<blockquote>
+<p>./setup.sh</p>
+</blockquote>
+<p>该过程可能耗时比较长（视你本地的perl 安装包的安装情况以及网速而定），可能需要1~2个小时。<br>可以通过查看setup.log的方式，检查安装进度。<br>配置完成之后，可以通过访问：</p>
+<blockquote>
+<p><a href="http://your.jbrowse.root/index.html?data=sample_data/json/volvox" target="_blank" rel="noopener">http://your.jbrowse.root/index.html?data=sample_data/json/volvox</a></p>
+</blockquote>
+<p>来检查你的JBrowser 是否安装成功。<br>这里，your.jbrowse.root 替换为：你的网站的根目录/JBrowse-1.12.3/ （版本不同，自然文件夹名字也不同）</p>
+<h1 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h1><p>在这里，我为了美观以及加强对于该程序的理解，没有直接在安装目录下配置基因组的信息，而是在网站根目录下新建了一个目录genome，存放数据。</p>
+<h2 id="不同目录下配置基因组（可选）"><a href="#不同目录下配置基因组（可选）" class="headerlink" title="不同目录下配置基因组（可选）"></a>不同目录下配置基因组（可选）</h2><p>即JBrowse-1.12.3 和genome 是并列的关系。<br>首先，将JBrowser目录下的jbrowse.conf 、jbrowse_conf.json 和index.html 拷贝到genome 目录下并修改。<br>index.html 在默认情况下，如果打开这个网页的话，是全屏显示JBrowser的，而我为了协调不同网页的呈现效果，对于index.html 进行了修改：</p>
+<blockquote>
+<p>在javascript 的段落之前增加 header  等部分，与网站下的其他网页保持一致的header 效果</p>
+</blockquote>
+<p>重点在于，既然修改了index 的位置，就要在其中对应的修改JavaScript 文件的位置，不然JBrowser 无法找到对应的配置文件。<br>举一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;../JBrowse-1.12.3/src/dojo/dojo.js&quot;&gt;&lt;/script&gt; #本来是src/dojo/dojo.js</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;../JBrowse-1.12.3/src/JBrowse/init.js&quot;&gt;&lt;/script&gt; #本来是src/JBrowse/init.js</span><br></pre></td></tr></table></figure></p>
+<p>这样的修改不止这两处，请仔细阅读index.html 文件，在其中修改。<br>但是这里我发现网页所需要的img，并没有修改目录位置的地方，只能通过把JBrowser中的img 文件夹复制到genome 下。</p>
+<h2 id="基因组序列的导入"><a href="#基因组序列的导入" class="headerlink" title="基因组序列的导入"></a>基因组序列的导入</h2><p>JBrowser 中有比较完善的序列导入工具，导入很简单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../JBrowse-1.12.3/bin/prepare-refseqs.pl --fasta genome.fasta</span><br></pre></td></tr></table></figure></p>
+<p>在该目录下，会形成data 文件夹，其中会包含seq 文件夹，刚刚导入的基因组就已经以json 数据的格式保存完成了。<br>可以通过该网址访问一下试试：</p>
+<blockquote>
+<p> <a href="http://your.jbrowse.root/genome/index.html" target="_blank" rel="noopener">http://your.jbrowse.root/genome/index.html</a></p>
+</blockquote>
+<p>如果不出意外的话，会发现基因组已经可以呈现了。</p>
+<h2 id="基因组注释和比对文件等track的导入"><a href="#基因组注释和比对文件等track的导入" class="headerlink" title="基因组注释和比对文件等track的导入"></a>基因组注释和比对文件等track的导入</h2><p>gff、bed 和bam 文件等都是可以导入到JBrowser中的，接下来，我们先尝试导入基因的注释结果。<br>为了分层次显示，我建议先导入基因的gff注释，而将其中的transcript、CDS、UTR、exon等line 去除，这样的话指定显示起来更加方便。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../JBrowse-1.12.1/bin/flatfile-to-json.pl -gff your_gene_annotation.gff --trackType CanvasFeatures --trackLabel Gene</span><br></pre></td></tr></table></figure></p>
+<p>会发现在data中又多了一个track 文件夹，还多了trackList.json。该文件是用于自定义track 极其重要的conf文件。<br>在此，分享我的一个conf 文件，方便解释各项参数的意义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;tracks&quot; : [</span><br><span class="line">      &#123; #第一个是genome 的DNA 序列</span><br><span class="line">        &quot;storeClass&quot; : &quot;JBrowse/Store/Sequence/StaticChunked&quot;,</span><br><span class="line">        &quot;chunkSize&quot; : 20000,</span><br><span class="line">        &quot;urlTemplate&quot; : &quot;seq/&#123;refseq_dirpath&#125;/&#123;refseq&#125;-&quot;,</span><br><span class="line">        &quot;label&quot; : &quot;DNA&quot;,</span><br><span class="line">        &quot;type&quot; : &quot;SequenceTrack&quot;,</span><br><span class="line">        &quot;category&quot; : &quot;1. Reference sequence&quot;, #类别，会在网页上分栏显示，顺序根据名字的排序结果排列。因此我加了前缀序号</span><br><span class="line">        &quot;key&quot; : &quot;Reference sequence&quot; #条目的显示名字</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;style&quot; : &#123;</span><br><span class="line">            &quot;className&quot; : &quot;feature2&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;key&quot; : &quot;1. Protein-coding gene&quot;,</span><br><span class="line">        &quot;storeClass&quot; : &quot;JBrowse/Store/SeqFeature/NCList&quot;,</span><br><span class="line">        &quot;trackType&quot; : &quot;CanvasFeatures&quot;,</span><br><span class="line">        &quot;urlTemplate&quot; : &quot;tracks/Gene/&#123;refseq&#125;/trackData.json&quot;,</span><br><span class="line">        &quot;compress&quot; : 0,</span><br><span class="line">        &quot;category&quot; : &quot;2. Gene Annotation&quot;,</span><br><span class="line">        &quot;label&quot; : &quot;Gene&quot;,</span><br><span class="line">        &quot;type&quot; : &quot;FeatureTrack&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;style&quot; : &#123;</span><br><span class="line">            &quot;className&quot; : &quot;transcript&quot;,</span><br><span class="line">            &quot;color&quot; : &quot;#EC7063&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;key&quot; : &quot;2. Coding sequence&quot;,</span><br><span class="line">        &quot;storeClass&quot; : &quot;JBrowse/Store/SeqFeature/NCList&quot;,</span><br><span class="line">        &quot;trackType&quot; : &quot;CanvasFeatures&quot;,</span><br><span class="line">        &quot;urlTemplate&quot; : &quot;tracks/Coding-sequence/&#123;refseq&#125;/trackData.json&quot;,</span><br><span class="line">        &quot;compress&quot; : 0,</span><br><span class="line">        &quot;category&quot; : &quot;2. Gene Annotation&quot;,</span><br><span class="line">        &quot;type&quot; : &quot;CanvasFeatures&quot;,</span><br><span class="line">        &quot;label&quot; : &quot;Coding sequence&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">  ],</span><br><span class="line">  &quot;formatVersion&quot; : 1</span><br></pre></td></tr></table></figure></p>
+<p>然后，可以导入transcript（包含exon-intron等信息）的gff，这里以transcript 为主，其他的信息如exon、UTR等，设置parent= 对应的transcript 即可。<br>导入的命令类似，不再赘述。</p>
+<h1 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h1><p>在完成基因组的基本呈现之后，有很多进阶功能可以实现，我也仅仅尝试了其中一小部分。</p>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><p>在JBrowser中，可以通过构建index 的方式，使得可以在网页中的搜索框中搜索相关的tracks<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">generate-names.pl --incremental</span><br></pre></td></tr></table></figure></p>
+<p>增加这个incremental 的参数，是可以对于增加的track 进行index。</p>
+<h2 id="删除tracks"><a href="#删除tracks" class="headerlink" title="删除tracks"></a>删除tracks</h2><p>不仅可以在conf中直接去掉对应的track 记录（–trackLabel），还可以完全的删除这个track（–delete)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">remove-track.pl --delete transcript</span><br></pre></td></tr></table></figure></p>
+<h1 id="问题与解决方案"><a href="#问题与解决方案" class="headerlink" title="问题与解决方案"></a>问题与解决方案</h1><p>在新增tracks之后，采用 incrementall 进行增加，可能报错“Error reading from name store”。<br>这时可以删除在json中的新增tracks 的记录，然后重新运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">generate-names.pl </span><br><span class="line">generate-names.pl --incremental</span><br></pre></td></tr></table></figure></p>
+<p>可能会解决该问题。<br>网上提供的方案是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">generate-names.pl --hashBits</span><br></pre></td></tr></table></figure></p>
+<p>但是在我的操作中无效。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>JBrowser的功能极其强大，自由度很高，上述仅仅是一些基本的用法。<br>随着使用的加深，后续本文章会持续更新。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/07/Circlator 环化基因组/" rel="next" title="Circlator 环化拼接的基因组">
+                <i class="fa fa-chevron-left"></i> Circlator 环化拼接的基因组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/08/Python 学习笔记-Part1/" rel="prev" title="Python 学习笔记-Part1">
+                Python 学习笔记-Part1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Kang Zhang">
+          <p class="site-author-name" itemprop="name">Kang Zhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">Go, Bioinfo, Go!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1935924171" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhang-kang-81" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本配置"><span class="nav-number">2.</span> <span class="nav-text">基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不同目录下配置基因组（可选）"><span class="nav-number">2.1.</span> <span class="nav-text">不同目录下配置基因组（可选）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基因组序列的导入"><span class="nav-number">2.2.</span> <span class="nav-text">基因组序列的导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基因组注释和比对文件等track的导入"><span class="nav-number">2.3.</span> <span class="nav-text">基因组注释和比对文件等track的导入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进阶配置"><span class="nav-number">3.</span> <span class="nav-text">进阶配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">3.1.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除tracks"><span class="nav-number">3.2.</span> <span class="nav-text">删除tracks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题与解决方案"><span class="nav-number">4.</span> <span class="nav-text">问题与解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kang Zhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">Total users:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">Total visited</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,783 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="配置过程本地首次配置本地配置node.js，以及git，这些直接在官网就可以下载，都是直接点击下一步安装。本地配置git的用户名与邮箱：12git config --global user.name yourgitnamegit config --global user.name yourgit@email.com 随后，为了与在线的github连接，需要配置ssh，并将生成的公钥粘贴到你的git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github Pages + Hexo 构建静态blog">
+<meta property="og:url" content="http://www.bioinfogo.tk/2017/06/01/Github Pages+Hexo/index.html">
+<meta property="og:site_name" content="BioinfoGo">
+<meta property="og:description" content="配置过程本地首次配置本地配置node.js，以及git，这些直接在官网就可以下载，都是直接点击下一步安装。本地配置git的用户名与邮箱：12git config --global user.name yourgitnamegit config --global user.name yourgit@email.com 随后，为了与在线的github连接，需要配置ssh，并将生成的公钥粘贴到你的git">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-06-01T02:29:27.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Github Pages + Hexo 构建静态blog">
+<meta name="twitter:description" content="配置过程本地首次配置本地配置node.js，以及git，这些直接在官网就可以下载，都是直接点击下一步安装。本地配置git的用户名与邮箱：12git config --global user.name yourgitnamegit config --global user.name yourgit@email.com 随后，为了与在线的github连接，需要配置ssh，并将生成的公钥粘贴到你的git">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.bioinfogo.tk/2017/06/01/Github Pages+Hexo/">
+
+
+
+
+
+  <title>Github Pages + Hexo 构建静态blog | BioinfoGo</title>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62943161";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BioinfoGo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.bioinfogo.tk/2017/06/01/Github Pages+Hexo/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kang Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BioinfoGo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Github Pages + Hexo 构建静态blog</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T08:30:05+08:00">
+                2017-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">Page visited</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h1><h2 id="本地首次配置"><a href="#本地首次配置" class="headerlink" title="本地首次配置"></a>本地首次配置</h2><p>本地配置node.js，以及git，这些直接在官网就可以下载，都是直接点击下一步安装。<br>本地配置git的用户名与邮箱：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name yourgitname</span><br><span class="line">git config --global user.name yourgit@email.com</span><br></pre></td></tr></table></figure></p>
+<p>随后，为了与在线的github连接，需要配置ssh，并将生成的公钥粘贴到你的github账户中。<br>本地配置ssh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;yourgit@email.com&quot;</span><br></pre></td></tr></table></figure></p>
+<p>成功后，在系统盘的user/your_user_name中找到.ssh文件夹，打开其中的id_rsa.pub文件，将所有内容复制。<br>接着，打开你的github 设置页页面，点击SSH and GPG keys，新建一个ssh key，将刚刚拷贝的内容粘贴过去即可。<br>这样的话，就可以在本地连接到你的github账号了，可以测试一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
+<p>如果显示成功的话，就说明配置完成了。</p>
+<p>然后，在管理员命令行下，利用npm安装hexo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">#等到安装成功后，运行：</span><br><span class="line">npm install hexo --save</span><br><span class="line">#测试是否安装成功：</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure></p>
+<p>成功后，可以开始配置hexo了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#初始化：</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure></p>
+<h2 id="多终端的配置"><a href="#多终端的配置" class="headerlink" title="多终端的配置"></a>多终端的配置</h2><p>如果想要在不同的终端都可以编写blog并上传，可以在多台电脑上配置git和node.js 等。<br>原理是：在第一台电脑上上传网站源代码到github 的另外一个repo上，然后在各个电脑上克隆代码，修改之后，将源代码再次保存在github上。<br>同时将修改后的网站，再次生成和上传。<br>中间遇到很多问题，最终采用了<a href="http://wangmuduo.com/2016/04/02/hexo-change-os/" target="_blank" rel="noopener">Hexo 换终端/换电脑小记</a>的教程。<br>具体来说，对于source，theme等文件夹以及yml等配置文件，采用单独保存到一个repo 的方式进行保存。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>利用npm安装hexo时候，注意以管理员的身份进行，不然的话可能报错无法找到npm（其实是权限的问题）</li>
+</ul>
+<h1 id="问题及解决方案"><a href="#问题及解决方案" class="headerlink" title="问题及解决方案"></a>问题及解决方案</h1><h2 id="hexo-module无法找到"><a href="#hexo-module无法找到" class="headerlink" title="hexo module无法找到"></a>hexo module无法找到</h2><p>在首次进行hexo g 的时候，报错：</p>
+<blockquote>
+<p>Cannot find module ‘C:\Program FIles\Git\node_modules\hexo-cli\bin\hexo’</p>
+</blockquote>
+<p>在网上查了半天，发现是由于这个module 在Git目录下没有找到导致的，解决方案如下：<br>在C盘中找到Users_your_name_\AppData\Roaming\npm\node_modules\hexo-cli 这个文件夹<br>然后将其中的node_modules 文件夹拷贝到Git 安装目录下，即可。</p>
+<h2 id="本地server-无法访问"><a href="#本地server-无法访问" class="headerlink" title="本地server 无法访问"></a>本地server 无法访问</h2><p>在我这里，是由于端口已经被占用导致的，更换端口即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s -p 9966</span><br></pre></td></tr></table></figure></p>
+<h2 id="CNAME-大小写无法区分"><a href="#CNAME-大小写无法区分" class="headerlink" title="CNAME 大小写无法区分"></a>CNAME 大小写无法区分</h2><p>在source下建立了CNAME文件，对于Pages进行了重定向，但上传到github后发现变成了小写。<br>因而导致了Github无法识别改文件，无法完成重定向。</p>
+<p>解决方案：<br>先在Github上删除小写的cname文件<br>在你的clone 目录下，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config core.ignorecase false</span><br></pre></td></tr></table></figure></p>
+<p>将ignorecase 设置为false，就可以区分大小写。但是在笔者的实践中，这样做无效。<br>估计是因为服务器端的信息还是没有更改。<br>最终问题的解决参考了<a href="http://1mhz.me/2015/hexo-deploy-case-sensitive/" target="_blank" rel="noopener">Yizhao He’s Notes</a><br>进入deploy_git/.git目录，修改其中的config文件，将ignorecase= ture 改为ignorecase= false<br>然后，删除整个deploy_git 文件夹，之后同步清空Github 上的信息，这一步很重要：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#在.deploy_git目录下</span><br><span class="line">git commit -m &apos;clean all file&apos;</span><br><span class="line">git push</span><br><span class="line">#回到上一目录，再次进行部署</span><br><span class="line">cd ..</span><br><span class="line">hexo clean</span><br><span class="line">hexo deploy -g</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/26/GlimmerHMM 安装与使用/" rel="next" title="GlimmerHMM 的安装与使用">
+                <i class="fa fa-chevron-left"></i> GlimmerHMM 的安装与使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/07/Circlator 环化基因组/" rel="prev" title="Circlator 环化拼接的基因组">
+                Circlator 环化拼接的基因组 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Kang Zhang">
+          <p class="site-author-name" itemprop="name">Kang Zhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">Go, Bioinfo, Go!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1935924171" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhang-kang-81" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置过程"><span class="nav-number">1.</span> <span class="nav-text">配置过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地首次配置"><span class="nav-number">1.1.</span> <span class="nav-text">本地首次配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多终端的配置"><span class="nav-number">1.2.</span> <span class="nav-text">多终端的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">1.3.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题及解决方案"><span class="nav-number">2.</span> <span class="nav-text">问题及解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-module无法找到"><span class="nav-number">2.1.</span> <span class="nav-text">hexo module无法找到</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地server-无法访问"><span class="nav-number">2.2.</span> <span class="nav-text">本地server 无法访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CNAME-大小写无法区分"><span class="nav-number">2.3.</span> <span class="nav-text">CNAME 大小写无法区分</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kang Zhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">Total users:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">Total visited</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

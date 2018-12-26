@@ -1,0 +1,796 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="本次笔记，主要包括的内容是具体的数字类型的用法学习。 数字 Number数据类型是不能改变的，这一点与Perl 不同，在Perl中如果想要对于数字和字符串进行计算是可行的，但是在Python中数字型的变量是不可以的。通过del 语法可以删除Number 对象：  del var_a, var_b  数字类型转换最常用的是int()，long()，float()，完成常见的数字类型的转换，分别是整数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 学习笔记-Part3">
+<meta property="og:url" content="http://www.bioinfogo.tk/2018/01/12/Python 学习笔记-Part3/index.html">
+<meta property="og:site_name" content="BioinfoGo">
+<meta property="og:description" content="本次笔记，主要包括的内容是具体的数字类型的用法学习。 数字 Number数据类型是不能改变的，这一点与Perl 不同，在Perl中如果想要对于数字和字符串进行计算是可行的，但是在Python中数字型的变量是不可以的。通过del 语法可以删除Number 对象：  del var_a, var_b  数字类型转换最常用的是int()，long()，float()，完成常见的数字类型的转换，分别是整数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-12T08:14:06.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 学习笔记-Part3">
+<meta name="twitter:description" content="本次笔记，主要包括的内容是具体的数字类型的用法学习。 数字 Number数据类型是不能改变的，这一点与Perl 不同，在Perl中如果想要对于数字和字符串进行计算是可行的，但是在Python中数字型的变量是不可以的。通过del 语法可以删除Number 对象：  del var_a, var_b  数字类型转换最常用的是int()，long()，float()，完成常见的数字类型的转换，分别是整数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.bioinfogo.tk/2018/01/12/Python 学习笔记-Part3/">
+
+
+
+
+
+  <title>Python 学习笔记-Part3 | BioinfoGo</title>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62943161";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BioinfoGo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-Linux 与编程语言 " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.bioinfogo.tk/2018/01/12/Python 学习笔记-Part3/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kang Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BioinfoGo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 学习笔记-Part3</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T16:13:30+08:00">
+                2018-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-与编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux 与编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">Page visited</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本次笔记，主要包括的内容是具体的数字类型的用法学习。</p>
+<h1 id="数字-Number"><a href="#数字-Number" class="headerlink" title="数字 Number"></a>数字 Number</h1><p>数据类型是不能改变的，这一点与Perl 不同，在Perl中如果想要对于数字和字符串进行计算是可行的，但是在Python中数字型的变量是不可以的。<br>通过del 语法可以删除Number 对象：</p>
+<blockquote>
+<p>del var_a, var_b</p>
+</blockquote>
+<h2 id="数字类型转换"><a href="#数字类型转换" class="headerlink" title="数字类型转换"></a>数字类型转换</h2><p>最常用的是int()，long()，float()，完成常见的数字类型的转换，分别是整数型，长整数型和浮点型。<br>其次，可以将数字转换为字符串、列表、元组： str()，list()，tuple()。</p>
+<h2 id="随机数函数"><a href="#随机数函数" class="headerlink" title="随机数函数"></a>随机数函数</h2><p>随机数太常用了，Python 提供了几个常用的函数，如下。<br>choice 函数，从序列中随机挑选一个出来。 如：</p>
+<blockquote>
+<p>random.choice( range(10))</p>
+</blockquote>
+<p>从0-9 中随机挑选一个整数出来。</p>
+<p>与此类似的是randrange([start,] stop [,step])，这个也不难理解。step，即步移或者基数递增，默认是1，从start 到stop，每次递增一个step。<br>然后从中选择一个随机数。举一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">range(1,5) #为 [1,2,3,4]，不包含5</span><br><span class="line">range(1,5,2) # 为[1,3] ，因为step 为2,</span><br><span class="line">range(5) # start 默认为0，所以为[0,1,2,3,4]</span><br></pre></td></tr></table></figure></p>
+<p>random()，则是从[0,1) 中随机一个数。</p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>在Part 1 中其实已经有所涉及了。比如字符串的位置是从0开始的，与Perl 相同。只是取范围的时候，上边界不在取值范围中。<br>比如字符串的运算与Perl 不同，连接符 和 重复输出都不同。<br>与Perl 相似，也采用反斜杠作为转义符，换行符、制表符等与Perl 也相同。</p>
+<p>有意思的是，Python 提供了原样输出的参数：</p>
+<blockquote>
+<p>print r\n’ # print R’\n’ # 不会输出换行符，而是原样输出\n</p>
+</blockquote>
+<h2 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h2><p>与Perl 需要printf 不同，在Python中直接可以利用print 进行字符串的格式化输出，用法也不太一样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print &quot;My name is %s and weight is %d kg!&quot; % (&apos;Zara&apos;, 21)</span><br><span class="line">#会输出：My name is Zara and weight is 21 kg!</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，%s 是格式化字符串的，而%d 则是格式化整数。这里要注意，用法的格式是 print “%s” %（‘Str’）。<br>具体的，如定义宽度，可以采用”*”，“-” 可以用于左对齐等等，用到的时候可以再看。</p>
+<h2 id="内建函数"><a href="#内建函数" class="headerlink" title="内建函数"></a>内建函数</h2><p>与Perl 相似，很多内建函数很有用，举一些例子：</p>
+<blockquote>
+<p>string.capitalize() 将字符串的第一个字符大写<br>string.count(str, beg=0,end=len(string)) 统计出现次数的函数，很有用。在string中搜索 str，并统计数目，可以指定区间。<br>string.find(str, beg=0, end=len(string)) 统计str是否包含在string中，可以搜索指定区间<br>string.join(seq) 以string 为分隔符，注意，不是以seq作为分隔符，将seq中所有元素合并为一个新的字符串<br>string.partition(str) 以str 为分割点，将string 分割为三个元素的元组：string_pre_str, str, string_post_str<br>string.replace(str1, str2, num=string.count(str1)) 将str1 替换为str2，替换的次数不超过num 次。这里num为str1 的出现次数，则是全部替换<br>string.split(str=””, num=string.count(str1)) 以str 分割string，如果指定num，则仅分割num个子字符串</p>
+</blockquote>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p>在前文中说过，类似于Perl 的数组，创建的方式与Perl 也类似。只是将小括号变为中括号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">list = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;];</span><br><span class="line">print list[2]; #取得&apos;c&apos;</span><br><span class="line">del list[1];</span><br><span class="line"># 此时，list为[&apos;a&apos;,&apos;c&apos;]</span><br><span class="line">len(list) #可以获取list 的长度，为3</span><br></pre></td></tr></table></figure></p>
+<p>比较特殊的一点是，可以利用del 命令来删除列表中的元素，后面的元素会自动提前。<br>列表可以利用“+” 和“*” 进行操作，前者表示组合不同的列表，而后者是重复。</p>
+<h2 id="列表函数-amp-方法"><a href="#列表函数-amp-方法" class="headerlink" title="列表函数&amp;方法"></a>列表函数&amp;方法</h2><p>相比Perl，Python 提供了很多很好用的函数和方法，可以很方便的处理列表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">max(list) #可以获取元素中的最大值</span><br><span class="line">min(list) #可以获取元素中的最小值</span><br><span class="line">list(seq) #将元组转换为列表</span><br><span class="line">list.append(obj) #在列表后面添加新的对象，类似于Perl中的push</span><br><span class="line">list.count(obj) #顾名思义，统计某一个元素在列表中的出现次数</span><br><span class="line">list.extend(seq) #与append不同的是，一次性加入另外一个list</span><br><span class="line">list.index(obj) #找出某一个值在列表中第一个匹配项的位置</span><br><span class="line">list.insert(index,obj) #很有用的方法，将obj 插入到列表的某一个位置</span><br><span class="line">list.pop(obj=list[-1]) #该方法用于移除list中的某一个元素，默认是最后一个元素，与Perl 相同</span><br><span class="line">list.remove(obj) #移除obj 的第一个匹配项</span><br><span class="line">list.reverse() #反向列表中的元素，即倒序排序</span><br><span class="line">list.sort([func]) #根据某一个规则进行排序，默认是根据ASCII 排序。</span><br></pre></td></tr></table></figure></p>
+<h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><p>这一部分在前面已经稍稍介绍过，与列表的不同之处在于，建立之后元素不能修改。<br>想要操作的话，可以对于不同的元组进行组合，或者删除某一个元组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (1,2,3);</span><br><span class="line">tup2 = (&apos;abc&apos;,&apos;xyz&apos;);</span><br><span class="line">tup3 = tup1 + tup2; #此处tup3 为 (1,2,3,&apos;abc&apos;,&apos;xyz&apos;)</span><br><span class="line">tup4 = tup1 * 2; #此处tup4 为(1,2,3,1,2,3)</span><br><span class="line">del tup4; #利用 del 函数删除元组</span><br></pre></td></tr></table></figure></p>
+<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><p>上文中说过，与Perl 中的哈希特别相似，发挥相同的功能。<br>只是定义的方式不同，采用”:” 由键指向值。外面是利用{} 进行包围。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dict = &#123;&apos;Name&apos;: &apos;Zara&apos;, &apos;Age&apos;: 7, &apos;Class&apos;: &apos;First&apos;&#125;;</span><br><span class="line">#若要想取得某一个键对应的值： dict[&apos;Name&apos;]</span><br><span class="line">del dict[&apos;Name&apos;]; #想要删除某一个元素（键及值）</span><br><span class="line">dict.clear(); #清空字典中的所有条目，这个字典还是存在的</span><br><span class="line">del dict; #删除字典</span><br><span class="line">len(dict); # 计算元素的个数，即键的数目</span><br></pre></td></tr></table></figure></p>
+<p>由于键不可变，所以可以为元组，但是不能为列表。</p>
+<h2 id="字典的方法"><a href="#字典的方法" class="headerlink" title="字典的方法"></a>字典的方法</h2><p>作为一种灵活又强大的数据类型，自然有很多好用的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dict.get(key, default=None) # 跟取值差不多，返回特定键的值，但是如果不存在的话，可以返回default</span><br><span class="line">dict.has_key(key) #与Perl中的defined $hash&#123;$key&#125; 相似，检查是否含有这个键</span><br><span class="line">dict.iterms() # 返回元组列表，即总体是一个列表，每一对键值都是一个小的元组</span><br><span class="line">dict.keys() #以列表的形式返回所有键</span><br><span class="line">dict.setdefault(key, default=None) #与get 方法相似，只是如果没有这个键的话，则会添加，并将值设置为default</span><br><span class="line">dict.update(dict2) #很有用，将dict2 的键值更新到dict中</span><br><span class="line">dict.values() #与keys 方法相似，以列表的形式返回所有值</span><br><span class="line">dict.pop(key[,default]) # pop即弹出，删除某个键所对应的值，并将值返回。</span><br></pre></td></tr></table></figure></p>
+<p>总体感觉，相比Perl，Python 提供的方法功能，解决了很多痛点，在一些基本操作上会更简洁。<br>此外，要注意到与Perl 类似，Python 字典中的值可以是任意类型，所以可以是列表或者是字典，从而实现了Perl中二维哈希或者哈希数组的功能。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/13/Python 学习笔记-Part2/" rel="next" title="Python 学习笔记-Part2">
+                <i class="fa fa-chevron-left"></i> Python 学习笔记-Part2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/25/Python 学习笔记-Part4/" rel="prev" title="Python 学习笔记-Part4">
+                Python 学习笔记-Part4 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Kang Zhang">
+          <p class="site-author-name" itemprop="name">Kang Zhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">Go, Bioinfo, Go!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1935924171" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhang-kang-81" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数字-Number"><span class="nav-number">1.</span> <span class="nav-text">数字 Number</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数字类型转换"><span class="nav-number">1.1.</span> <span class="nav-text">数字类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机数函数"><span class="nav-number">1.2.</span> <span class="nav-text">随机数函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串"><span class="nav-number">2.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化输出"><span class="nav-number">2.1.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内建函数"><span class="nav-number">2.2.</span> <span class="nav-text">内建函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表"><span class="nav-number">3.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列表函数-amp-方法"><span class="nav-number">3.1.</span> <span class="nav-text">列表函数&amp;方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元组"><span class="nav-number">4.</span> <span class="nav-text">元组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字典"><span class="nav-number">5.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字典的方法"><span class="nav-number">5.1.</span> <span class="nav-text">字典的方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kang Zhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">Total users:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">Total visited</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,794 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="Python 说是目前最火的语言也不为过，在生物信息的领域中，也早已盖过曾经的老大哥Perl，成为使用最广泛的脚本语言。就我自己周围人的反馈而言，大体有以下几点优势：  易学习，易上手。相比Perl 天书一般的符号，Python 的先天优势明显。 胶水语言，在多个领域均有突出的表现。 机器学习愈演愈烈，Python 拥有诸多的包和相关的接口，可以实现机器学习的快速上手。  也是基于以上几点，也有个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 学习笔记-Part1">
+<meta property="og:url" content="http://www.bioinfogo.tk/2017/12/08/Python 学习笔记-Part1/index.html">
+<meta property="og:site_name" content="BioinfoGo">
+<meta property="og:description" content="Python 说是目前最火的语言也不为过，在生物信息的领域中，也早已盖过曾经的老大哥Perl，成为使用最广泛的脚本语言。就我自己周围人的反馈而言，大体有以下几点优势：  易学习，易上手。相比Perl 天书一般的符号，Python 的先天优势明显。 胶水语言，在多个领域均有突出的表现。 机器学习愈演愈烈，Python 拥有诸多的包和相关的接口，可以实现机器学习的快速上手。  也是基于以上几点，也有个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-08T08:39:45.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 学习笔记-Part1">
+<meta name="twitter:description" content="Python 说是目前最火的语言也不为过，在生物信息的领域中，也早已盖过曾经的老大哥Perl，成为使用最广泛的脚本语言。就我自己周围人的反馈而言，大体有以下几点优势：  易学习，易上手。相比Perl 天书一般的符号，Python 的先天优势明显。 胶水语言，在多个领域均有突出的表现。 机器学习愈演愈烈，Python 拥有诸多的包和相关的接口，可以实现机器学习的快速上手。  也是基于以上几点，也有个">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.bioinfogo.tk/2017/12/08/Python 学习笔记-Part1/">
+
+
+
+
+
+  <title>Python 学习笔记-Part1 | BioinfoGo</title>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62943161";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BioinfoGo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-Linux 与编程语言 " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.bioinfogo.tk/2017/12/08/Python 学习笔记-Part1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kang Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BioinfoGo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 学习笔记-Part1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T16:37:30+08:00">
+                2017-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-与编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux 与编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">Page visited</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Python 说是目前最火的语言也不为过，在生物信息的领域中，也早已盖过曾经的老大哥Perl，成为使用最广泛的脚本语言。<br>就我自己周围人的反馈而言，大体有以下几点优势：</p>
+<ol>
+<li>易学习，易上手。相比Perl 天书一般的符号，Python 的先天优势明显。</li>
+<li>胶水语言，在多个领域均有突出的表现。</li>
+<li>机器学习愈演愈烈，Python 拥有诸多的包和相关的接口，可以实现机器学习的快速上手。</li>
+</ol>
+<p>也是基于以上几点，也有个人对于Python 语法的好奇，决定抽时间学习一下Python。<br>以下学习均基于runoob.com 上的<a href="http://www.runoob.com/python/python-tutorial.html" target="_blank" rel="noopener">Python 教程</a>，在原基础上增加了一点点相关知识点Perl 与Python 的对比，仅供参考。</p>
+<h1 id="基本注意点"><a href="#基本注意点" class="headerlink" title="基本注意点"></a>基本注意点</h1><h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>Python 的代码块不采用{}，而是采用缩进来进行模块的判断，代码块中缩进的空白数目必须相同。<br>一行中，可以使用多条语句，用分号分隔开即可。<br>print 默认是换行输出的，想要不换行，在变量末尾加上逗号，如 print a,</p>
+<h2 id="三引号"><a href="#三引号" class="headerlink" title="三引号"></a>三引号</h2><p> “”” 可以多行输入，可以编写多行的文本，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paragraph = &quot;&quot;&quot;这是一个段落。</span><br><span class="line">包含了多个语句&quot;&quot;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>也可以作为多行注释，三个双引号，或者三个单引号均可。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&apos;&apos;&apos;</span><br><span class="line">这是多行注释，使用单引号。</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure></p>
+<h1 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h1><p>Python 的变量不需要声明类型，这一点与Perl 不同， 有点类似于PHP。但是在使用前必须赋值，不然变量不会被创建。<br>变量不需要 “$” 符号。<br>多变量赋值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#多个变量同时赋值</span><br><span class="line">a = b = c = 1</span><br><span class="line">#多个变量，赋不同的值</span><br><span class="line">a, b, c = 1, 2, &quot;john&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>Python 中一共有五种数据类型：</p>
+<blockquote>
+<p>Numbers 数字<br>String 字符串<br>List 列表<br>Tuple 元组<br>Dictionary 字典</p>
+</blockquote>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>数字和字符串，比较常见，不再赘述。值得一提的是 Python中的字符串，位置与Perl相似，从0开始，而从右到左检索时，则是从-1开始。</p>
+<h3 id="字符串截取"><a href="#字符串截取" class="headerlink" title="字符串截取"></a>字符串截取</h3><p>字符的截取，类似于Perl 中的substr 函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s = &apos;ilovepython&apos;</span><br></pre></td></tr></table></figure></p>
+<p>那么，s[1:5]，则取的是love。不同的是，取到的是love，而不是lovep，因为取值的上边界不包括在范围中</p>
+<h3 id="字符串连接"><a href="#字符串连接" class="headerlink" title="字符串连接"></a>字符串连接</h3><p>与Perl中采用 “.” 作为字符串连接符不同，Python采用的是”+“，加号。 strC = strA + strB<br>此外，重复操作也不同，Perl中是”x”，而Python 则是 “<em>“。 strAA = strA \</em> 2</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>使用最广泛，类似于Perl 中的数组，同样采用 [] 作为标识符。<br>字符串连接符也适用于列表，可以直接将不同的列表进行相加。</p>
+<h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><p>与列表类似，但是不能二次赋值，相当于只读属性的列表，采用 () 作为标识符，标识符与Perl中的数组一样。<br>因此，一定注意区分Perl 与Python 中相应数据类型，不要搞混。</p>
+<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><p>与Perl中的哈希类似，采用键值进行存取，标识符同样是 {}。<br>定义的方式与Perl不同，采用”:” 由key指向value。值得注意的是，如何获取字典中的所有键值？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&apos;name&apos;: &apos;john&apos;,&apos;code&apos;:6734, &apos;dept&apos;: &apos;sales&apos;&#125;</span><br><span class="line">print tinydict.keys()</span><br><span class="line">print tinydict.values()</span><br></pre></td></tr></table></figure></p>
+<p>输出的结果中，key 和value 都作为一个新的列表。</p>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>这部分与Perl 类似，注意到，Python 中可以取整数，运算符为 “//“，9//2 为4，这一点比Perl 采用int 更加方便。</p>
+<h2 id="比较、赋值与逻辑运算符"><a href="#比较、赋值与逻辑运算符" class="headerlink" title="比较、赋值与逻辑运算符"></a>比较、赋值与逻辑运算符</h2><p>比较、赋值运算符这一部分，与Perl 完全一致，不再赘述。<br>位运算符，我目前几乎不用到，在此暂不描述。</p>
+<p>至于逻辑运算符，与Perl 不同的是，不支持 “&amp;&amp;”、”||” 用以表示 and 和 or。</p>
+<h2 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h2><p>这一部分与Perl不同，Python 支持从字符串、列表、元组中查找是否含有特定的序列，采用 in 和 not in 进行判断。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = 1</span><br><span class="line">list =[ 1,2,3,4,5]</span><br><span class="line">if ( a in list):</span><br><span class="line">    print &quot;Yes&quot;</span><br><span class="line">else:</span><br><span class="line">    print &quot;No&quot;</span><br></pre></td></tr></table></figure></p>
+<p>结果自然是Yes。</p>
+<h2 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a>身份运算符</h2><p>Python 引入了身份运算符的概念，采用 is 和 is not 进行判断。这里是检查两个标识符是否引用自同一个对象。<br>这里有一个问题，与 == 不同，is 判断的是变量的引用对象是否是同一个，而== 判断的是值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; b = a</span><br><span class="line">&gt;&gt;&gt; b is a </span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; b == a</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; b = a[:]</span><br><span class="line">&gt;&gt;&gt; b is a</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; b == a</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>个中区别，可以通过这个案例体会一下。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/30/JBrowser 基因组呈现工具的配置/" rel="next" title="JBrowser 基因组呈现工具的配置">
+                <i class="fa fa-chevron-left"></i> JBrowser 基因组呈现工具的配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/13/Python 学习笔记-Part2/" rel="prev" title="Python 学习笔记-Part2">
+                Python 学习笔记-Part2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Kang Zhang">
+          <p class="site-author-name" itemprop="name">Kang Zhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">Go, Bioinfo, Go!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1935924171" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhang-kang-81" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本注意点"><span class="nav-number">1.</span> <span class="nav-text">基本注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法"><span class="nav-number">1.1.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三引号"><span class="nav-number">1.2.</span> <span class="nav-text">三引号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量类型"><span class="nav-number">2.</span> <span class="nav-text">变量类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">2.2.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串截取"><span class="nav-number">2.2.1.</span> <span class="nav-text">字符串截取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串连接"><span class="nav-number">2.2.2.</span> <span class="nav-text">字符串连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">2.3.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元组"><span class="nav-number">2.4.</span> <span class="nav-text">元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典"><span class="nav-number">2.5.</span> <span class="nav-text">字典</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符"><span class="nav-number">3.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算术运算符"><span class="nav-number">3.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较、赋值与逻辑运算符"><span class="nav-number">3.2.</span> <span class="nav-text">比较、赋值与逻辑运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员运算符"><span class="nav-number">3.3.</span> <span class="nav-text">成员运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#身份运算符"><span class="nav-number">3.4.</span> <span class="nav-text">身份运算符</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kang Zhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">Total users:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">Total visited</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
